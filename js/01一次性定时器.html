@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <input type="button" value="停下" id="btn" >
+    <script>
+      window.onload=function(){
+          var timeId=window.setTimeout(function(){
+              alert("您好");
+          },1000);
+          document.getElementById("btn").onclick=function(){
+              clearTimeout(timeId);
+          };
+      }  ;
+    </script>
+</body>
+</html>
