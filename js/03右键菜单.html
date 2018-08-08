@@ -33,6 +33,7 @@
     </style>
 </head>
 <body>
+    
     <ul id="menu">
         <li>菜单1</li>
         <li>菜单2</li>
@@ -40,6 +41,15 @@
         <li>菜单4</li>
         <li>菜单5</li>
         
-    </ul>                         
+    </ul> 
+    <script>
+        var oMenu =document.getElementById('menu');
+       document.oncontextmenu=function(){
+        
+            oMenu.style.display='block';
+          
+       };
+   </script>
+   <script src="wichung-1.0.js"></script>                        
 </body>         
 </html>

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+       margin: 0;
+        }
+   #container{
+      width: 500px;
+      margin: 50px auto;
+   }
+   li{
+      list-style: none;
+      height: 50px;
+      line-height: 50px;
+      background: #cccccc;
+      padding: 0 10px;
+      margin-top: 10px;
+   }
+   .price{
+       float: right;
+   }
+   .selected{
+       background: pink;
+   }
+    </style>
+</head>
+<body>
+   
+
+<div id="container">
+    <div>
+    <h2>todolist</h2>
+    <hr>
+    名称：<input type="text" placeholder="请输入产品名称" v-model="name">
+    价格：<input type="text" placeholder="输入产品价格" v-model="price">
+    <button class="add" @click="add()" > 增加 </button>
+</br>
+    <input type="text" placeholder="请输入关键字">
+    <button>查询</button>
+</div>
+    <div>
+    <ul>
+        <li v-for="product in proList" @click="change(product)" :class="{selected:product.isSelected}">
+            <input type="checkbox" >
+            <span>X</span>
+            <span class="name">{{product.name}}</span>
+            <span class="price">{{product.price}}</span>
+        </li>
+        <!-- <li>
+                <input type="checkbox">
+                <span>X</span>
+                <span class="name">裤子</span>
+                <span class="price">888</span>
+            </li>
+            <li>
+                    <input type="checkbox">
+                    <span>X</span>
+                    <span class="cloth">鞋</span>
+                    <span class="price">888</span>
+                </li>
+                <li>
+                        <input type="checkbox">
+                        <span>X</span>
+                        <span class="cloth">iphone</span>
+                        <span class="price">888</span>
+                    </li>
+                    <li>
+                            <input type="checkbox">
+                            <span>X</span>
+                            <span class="cloth">电脑</span>
+                            <span class="price">888</span>
+                        </li> -->
+    </ul>
+    <div>
+        <button>删除选中</button>总价：<span>888</span>
+    </div>
+</div>
+</div>
+<script src="vue.js"></script> 
+<script>
+    new Vue({
+        el:'#container',
+        data:{
+           
+             proList:[
+                {
+                name:'衣服',
+                price:'888',
+                isSelected:false
+            },
+            {
+                name:'裤子',
+                price:'888',
+                isSelected:false
+            },
+            {
+                name:'鞋', 
+                price:'888',
+                isSelected:false
+            },
+            {
+                name:'iphone',
+                price:'888',
+                isSelected:false
+            },
+            {
+                name:'电脑', 
+                price:'888',
+                isSelected:false
+            }
+         
+
+            
+            ],
+            name:'',
+            price:''
+
+        },
+        methods:{
+            change(product){
+              product.isSelected=!product.isSelected;
+            },
+            add(){
+               
+            
+            this.proList.push({
+                name:this.name,
+                price:this.price,
+                isSelected:false
+            })
+        }
+        }
+
+    })
+</script>  
+</body>
+</html>
