@@ -37,19 +37,19 @@
     <div>
     <h2>todolist</h2>
     <hr>
-    名称：<input type="text" placeholder="请输入产品名称" v-model="name">
+    名称：<input type="text" placeholder="请输入产品名称"  v-model.trim="name">
     价格：<input type="text" placeholder="输入产品价格" v-model="price">
     <button class="add" @click="add()" > 增加 </button>
 </br>
-    <input type="text" placeholder="请输入关键字">
-    <button>查询</button>
+    <input type="text"v-model="keyWord" placeholder="请输入关键字">
+    <button @click="search">查询</button>
 </div>
     <div>
     <ul>
-        <li v-for="product in proList" @click="change(product)" :class="{selected:product.isSelected}">
-            <input type="checkbox" >
-            <span>X</span>
-            <span class="name">{{product.name}}</span>
+        <li v-for="(product,index) in proList" @click="change(product,index)" :class="{selected:product.isSelected}">
+            <input  @click.stop type="checkbox" v-model="check" :value="index">
+            <span  @click.stop="del(index)">X</span>
+            <span class="name" >{{product.name}}</span>
             <span class="price">{{product.price}}</span>
         </li>
         <!-- <li>
@@ -78,13 +78,13 @@
                         </li> -->
     </ul>
     <div>
-        <button>删除选中</button>总价：<span>888</span>
+        <button @click="delChecked">删除选中</button>总价：<span>{{sum()}}</span>
     </div>
 </div>
 </div>
 <script src="vue.js"></script> 
 <script>
-    new Vue({
+    let vm=new Vue({
         el:'#container',
         data:{
            
@@ -119,12 +119,21 @@
             
             ],
             name:'',
-            price:''
+            price:'',
+            check:[],
+            keyWord:'',
 
         },
         methods:{
-            change(product){
+            change(product,index){
+                if(product.isSelected){
+                    var index=this.check.indexOf(index);
+                    this.check.splice(index,1) ;
+                }else{
+                    this.check.push(index);
+                }
               product.isSelected=!product.isSelected;
+            //   this.check.push(index);
             },
             add(){
                
@@ -133,8 +142,43 @@
                 name:this.name,
                 price:this.price,
                 isSelected:false
-            })
-        }
+            });
+            this.name='';
+            this.price='';
+        },
+        sum(){
+            var totalPrice =0;
+            this.proList.forEach(function(pro,index){
+                if(pro.isSelected){
+                  totalPrice+=parseInt(pro.price);
+                }
+
+            });
+            return totalPrice;
+            
+        },
+    
+       delChecked() {
+                    this.proList = this.proList.filter((elem, index) => {
+                        if (!this.check.includes(index)) {
+                            return elem;
+                            
+                        }
+
+                    });
+                    this.check = [];
+                   
+                },
+                search() {
+                    this.proList = this.proList.filter(function (elem, index) {
+                        if (elem.name.includes(this.keyWord)) {
+                            return elem;
+                        }
+                    }.bind(this));
+                },
+                del(index) {
+                    this.proList.splice(index, 1);
+                },
         }
 
     })
