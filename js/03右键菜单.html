@@ -14,6 +14,7 @@
             border: 1px solid black;
             width: 120px;
             display: none;
+            position: absolute;
         }
         #menu li{
             width: 120px;
@@ -42,13 +43,46 @@
         <li>菜单5</li>
         
     </ul> 
-    <script>
+    <!-- <script>
+        
         var oMenu =document.getElementById('menu');
-       document.oncontextmenu=function(){
+        var aLi =oMenu.getElementsByTagName('li');
+       document.oncontextmenu=function(ev){
+           ev=ev||window.event;
         
             oMenu.style.display='block';
+            oMenu.style.top=ev.clientY+'px';
+            oMenu.style.left=ev.clientX+'px';
+            return false;
           
        };
+       document.onclick=function(){
+           oMenu.style.display='none';
+       }
+       for(var i=0;i<aLi.length;i++){
+           aLi[i].onclick=function(){
+               alert(this.innerHTML);
+           };
+       }
+   </script> -->
+   <script>
+   var oMenu = document.getElementById('menu');
+   var aLi = oMenu.getElementsByTagName('li');
+   document.oncontextmenu=function(ev){
+       ev=ev||window.event;
+         oMenu.style.display="block";
+         oMenu.style.top=ev.clientY +'px';
+         oMenu.style.left=ev.clientX+'px';
+         return false;
+   }
+   document.onclick=function(){
+       oMenu.style.display="none"
+   }
+   for(var i=0;i<aLi.length;i++){
+       aLi[i].onclick=function(){
+           alert(this.innerHTML);
+       }     
+   }
    </script>
    <script src="wichung-1.0.js"></script>                        
 </body>         
