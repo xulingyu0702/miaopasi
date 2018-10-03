@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #menu{
+            border: 1px solid;
+            width: 120px;
+            background-color: #ffffff;
+            display: none;
+            position: absolute;
+            }
+        #menu li{
+            width: 120px;
+            height: 30px;
+            list-style: none;
+            border-bottom: 1px dashed #ccc;
+            text-align:center;
+            cursor: pointer;
+            line-height: 30px;
+
+        }
+        #menu li:last-child{
+            border-bottom:none;
+
+        }
+        #menu li:hover{
+            background-color: #ccc;
+        }
+            
+     
+    </style>
+</head>
+<body>
+    
+    <ul id="menu">
+        <li>菜单1</li>
+        <li>菜单2</li>
+        <li>菜单3</li>
+        <li>菜单4</li>
+        <li>菜单5</li>
+        
+    </ul> 
+    <script>
+    var oMenu=document.getElementById("menu");
+    var aLi=document.getElementsByTagName("li");
+    document.oncontextmenu=function(ev){
+        ev=event||window.event;
+        oMenu.style.display='block';
+        oMenu.style.left=ev.clientX+'px';
+        oMenu.style.top=ev.clientY+'px';//注意这里是TOP，不要顺手写成right
+        return false;
+
+    }  
+    document.onclick=function(){
+        oMenu.style.display='none';
+        
+    }  
+    for(var i=0; i<aLi.length;i++){
+        aLi[i].onclick=function(){
+            alert(this.innerHTML);
+        }
+    }
+    </script>
+
+   <script src="wichung-1.0.js"></script>                        
+</body>         
+</html>
