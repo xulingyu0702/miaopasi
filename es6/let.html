@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+let a =20;
+function fn(){
+    alert(a);//TDZ开始 暂时性死区  没有变量提升 预解析 
+    let a=10;//TDZ结束
+}
+fn()
+
+
+
+</script>
+</html>
